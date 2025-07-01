@@ -72,3 +72,64 @@ Free RTOS는 Kernel.
 
 ### Thread
 프로세스를 여러단위로 나눈 것
+
+## Word
+Register Size  
+Register가 한 번에 처리할 수 있는 양
+
+64bit 컴퓨터: Register가 한 번에 처리할 수 있는 양이 64bit
+
+# 초기 설정
+
+## Free RTOS 선택  
+
+![]({05D00F4E-C384-419B-93B5-6C655E602F4C}.png)
+
+## CMSIS V1 선택  
+
+![]({BF75D103-58DB-4DE2-8551-D62AEF6D6799}.png)
+
+## ADD Task 하기
+![]({56937CB8-1451-4A3D-B555-79DDB7E6F173}.png)
+
+### 스택 사이즈
+![]({F122D4C9-3656-4304-93E0-6E0344125A39}.png)
+
+해당 thread가 차지하는 STACK 사이즈.
+현재 ARM Core는 4byte 이므로 STACK 은 128X4byte가 된다.
+
+### 우선순위
+
+![]({52F46B01-1445-4B83-96FE-9B13A643D840}.png)  
+
+위에서 아래로 갈수록 우선순위가 높아짐
+
+### 함수이름
+![]({F3B40E71-B6A2-42AD-B946-E27E9B2A11F2}.png)
+
+이렇게 설정하기!
+![]({DCE7E220-02F8-42A3-9038-312D35AA688B}.png)
+
+
+이렇게 생성하면 WARNING이 하나 뜬다.  
+
+![]({83EFF147-65D7-4DC6-AD30-A1A1005FB1E0}.png)
+
+1.RTOS도 SysTick을 사용하여 interrupt를 발생시키게 되는데, Systick은 HAL이 사용중임
+따라서 HAL이 Systick을 사용하지 않게 바꿔야함
+
+따라서 다시 돌아와서 SYS의 Timebase Source를 TIM11로 변경하자.  
+
+![]({9F03DAFE-E9D5-4198-B600-199DA2D7CE0E}.png)
+
+
+2.USE_NEWLIB_REENTRANT 설정 필요  
+현재: newlib는 STM32에서 사용하는 C 라이브러리, 기본적으로 비재진입성 (non-reentrant)
+
+문제: RTOS를 쓰면 여러 쓰레드가 동시에 printf 같은 C 라이브러리 함수를 사용할 수 있는데, 이때 충돌이 날 수 있음
+
+해결: USE_NEWLIB_REENTRANT 옵션을 활성화하면, 라이브러리를 재진입 가능하게 만들어줌
+
+
+![]({0966B239-7AB8-428A-8E8D-9CF9AED75E94}.png)
+
