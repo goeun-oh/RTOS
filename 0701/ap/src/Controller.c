@@ -35,13 +35,13 @@ void Controller_Mode()
 		if (btnWatch.id == BTN_MODE) {
 			modeState = S_STOP_WATCH;
 		}
-		TimeWatch_Excute();
+		TimeWatch_Excute(&btnWatch);
 		break;
 	case S_STOP_WATCH:
 		if (btnWatch.id == BTN_MODE) {
 			modeState = S_TIME_WATCH;
 		}
-		StopWatch_Excute();
+		StopWatch_Excute(&btnWatch);
 		break;
 	}
 }
