@@ -49,13 +49,8 @@ void StopWatch_IncTime()
 
 button_t btnWatch = {0};
 
-void StopWatch_Excute()
+void StopWatch_Excute(button_t btnWatch)
 {
-	if(isQueEmpty(&btnQue)){
-		return;
-	}
-	deQue(&btnQue, &btnWatch);
-
 	switch (stopWatchState)
 	{
 	case STOP:
