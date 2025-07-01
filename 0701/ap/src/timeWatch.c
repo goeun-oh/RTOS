@@ -36,10 +36,14 @@ void TimeWatch_IncTimeCallBack()
 	}
 	timeWatch.hour = 0;
 }
-
+static button_t btnWatch = {0};
 void TimeWatch_Excute()
 {
-	Presenter_OutData(timeWatch);
+	if(isQueEmpty(&btnQue)){
+		return;
+		}
+		deQue(&btnQue, &btnWatch);
+
 
 //	FND_WriteData(timeWatch.hour*100 + timeWatch.min);
 //
