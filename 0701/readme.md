@@ -133,3 +133,34 @@ Register가 한 번에 처리할 수 있는 양
 
 ![]({0966B239-7AB8-428A-8E8D-9CF9AED75E94}.png)
 
+
+# Thread
+
+```c
+osThreadId defaultTaskHandle;
+osThreadId myLed1Handle;
+osThreadId myLed2Handle;
+osThreadId myLed3Handle;
+```
+
+thread를 만들면 메모리에 STACK memory 공간이 생긴다. (각각 독립적인)
+
+![]({A5967BCD-1BC4-4A6D-B6DE-C0D3337273A9}.png)
+
+non-OS프로그램에서는 메모리 공간 맨 위에서 stack pointer가 내려와서 다 공유했었음.  
+이제는 thread별로 stack pointer가 내려와서 독립적으로 자신만의 stack 공간을 사용  
+각 Thread가 자신만의 Stack을 가지게 되어 안정적인 멀티태스킹이 가능해짐
+
+thread가 돌아가며 CPU를 점유함 -> `스케줄링`
+
+스케줄을 정해주는 애 -> `스케줄러`
+
+
+Thread를 Context라고 함
+
+context가 CPU 점유 변경 -> context switching
+
+***context switching을 scheduler가 해준다!!***
+
+FSM 상태 변화도 context switching 의 한 종류
+
