@@ -25,5 +25,24 @@ APB는 `120MHz`로 동작.
 
 MPU 설정이 필요함
 
-AXI-SRAM 사이즈가 512KB
+AXI-SRAM 사이즈가 512KB  
+RAM Area는 나누어져 있다.  
+
 ![]({EA5ED18A-FE49-44C0-9360-2DA0343A2E0D}.png)
+
+CPU가 480MHz 인데 나머지 버스들 클럭이 훨씬 느리다.
+따라서 캐시가 중간 버퍼 역할을 해주어 480MHz 로 무사히 동작할 수 있도록 해준다.
+
+# DMA (Direct Memory Access)
+
+D Cache는 CPU 전용 고속 임시 저장소.
+DMA는 CPU를 대신해서 메모리에 접근하여 메모리 read/write을 수행한다. 
+DMA는 Data Cache에 접근이 불가하고 오직 RAM에만 접근한다.
+
+# FMC
+
+DRAM 연동하는 모듈
+
+# LCD 추가
+SPI 로 나가는 clk 속도 100MHz로 변경
+![](image-1.png)
